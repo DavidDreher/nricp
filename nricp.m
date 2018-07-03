@@ -42,6 +42,10 @@ function [ vertsTransformed, X ] = nricp( Source, Target, Options )
 %   vertsTransformed : N X 3 vertices of transformed source mesh,
 %   X : (4N) X 3 stacked matrix of transformations.
 
+ownDir = fileparts(mfilename('fullpath'));
+dependencyPath = fullfile(ownDir, 'dependencies');
+addpath(genpath(dependencyPath));
+
 % Set default parameters
 if ~isfield(Options, 'gamm')
     Options.gamm = 1;
@@ -300,6 +304,8 @@ if Options.plot == 1
     pause(2);
 %     delete(p);
 end
+
+rmpath(genpath(dependencyPath));
 
 function [projections] = projectNormals(sourceVertices, Target, normals)
 % projectNormals takes a set of vertices and their surface normals and
