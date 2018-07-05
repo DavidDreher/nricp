@@ -81,12 +81,20 @@ end
 % Optionally plot source and target surfaces
 if Options.plot == 1
     clf;
-    PlotTarget = rmfield(Target, 'normals');
+    if isfield( Target, 'normals')
+        PlotTarget = rmfield(Target, 'normals');
+    else
+        PlotTarget = Target;
+    end
     p = patch(PlotTarget, 'facecolor', 'b', 'EdgeColor',  'none', ...
               'FaceAlpha', 0.5);
     hold on;
     
-    PlotSource = rmfield(Source, 'normals');
+    if isfield( Source, 'normals')
+        PlotSource = rmfield(Source, 'normals');
+    else
+        PlotSource = Source;
+    end
     h = patch(PlotSource, 'facecolor', 'r', 'EdgeColor',  'none', ...
         'FaceAlpha', 0.5);
     material dull; light; grid on; xlabel('x'); ylabel('y'); zlabel('z');
